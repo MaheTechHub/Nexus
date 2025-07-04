@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexusAI - Supercharge Your Workflow</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Rajdhani:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --dark-bg: #0e0e0e;
+            --darker-bg: #080808;
+            --neon-blue: #00f3ff;
+            --electric-purple: #b300ff;
+            --neon-pink: #ff00f7;
+            --text-light: #f0f0f0;
+            --text-gray: #aaaaaa;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+        }
+
+        /* Floating Balls Background */
+        .bg-balls {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .ball {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(40px);
+            opacity: 0.3;
+            animation: float 15s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translate(0, 0);
+            }
+            25% {
+                transform: translate(50px, 50px);
+            }
+            50% {
+                transform: translate(100px, 0);
+            }
+            75% {
+                transform: translate(50px, -50px);
+            }
+            100% {
+                transform: translate(0, 0);
+            }
+        }
+
+        /* Header Styles */
+        header {
+            background-color: rgba(14, 14, 14, 0.9);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 243, 255, 0.2);
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: var(--neon-blue);
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            color: var(--electric-purple);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav ul li a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav ul li a:hover {
+            color: var(--neon-blue);
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--neon-blue);
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        .login-btn {
+            background: transparent;
+            color: var(--neon-blue);
+            border: 1px solid var(--neon-blue);
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .login-btn:hover {
+            background: rgba(0, 243, 255, 0.1);
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.5);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 150px 5% 100px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            flex: 1;
+            max-width: 600px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            color: var(--neon-blue);
+            text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
+        }
+
+        .hero p.subtitle {
+            font-size: 1.5rem;
+            color: var(--text-gray);
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+
+        .typewriter {
+            font-size: 1.8rem;
+            font-weight: 500;
+            color: var(--text-light);
+            margin-bottom: 40px;
+            height: 50px;
+        }
+
+        .typewriter span {
+            border-right: 2px solid var(--neon-blue);
+            animation: blink 0.7s infinite;
+        }
+
+        @keyframes blink {
+            from, to { border-color: transparent }
+            50% { border-color: var(--neon-blue); }
+        }
+
+        .cta-btn {
+            background: linear-gradient(45deg, var(--neon-blue), var(--electric-purple));
+            color: var(--dark-bg);
+            border: none;
+            padding: 15px 40px;
+            border-radius: 30px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            font-size: 1.2rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(179, 0, 255, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-btn:hover {
+            box-shadow: 0 0 25px rgba(179, 0, 255, 0.8);
+            transform: translateY(-3px);
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .ai-bot {
+            width: 400px;
+            height: 400px;
+            background: url('https://i.imgur.com/JQ9qy5E.png') center/contain no-repeat;
+            filter: drop-shadow(0 0 20px rgba(0, 243, 255, 0.5));
+            animation: floatBot 6s ease-in-out infinite;
+        }
+
+        @keyframes floatBot {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Features Section */
+        .features {
+            padding: 100px 5%;
+            background-color: var(--darker-bg);
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 70px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--neon-blue);
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
+        }
+
+        .section-title p {
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: rgba(20, 20, 20, 0.7);
+            border-radius: 15px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 243, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            z-index: -1;
+            background: linear-gradient(45deg, var(--neon-blue), var(--electric-purple));
+            border-radius: 16px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .feature-card:hover::before {
+            opacity: 0.7;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 243, 255, 0.2);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(0, 243, 255, 0.1);
+            font-size: 2rem;
+            color: var(--neon-blue);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover .feature-icon {
+            background: rgba(0, 243, 255, 0.2);
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.5);
+            transform: scale(1.1);
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--electric-purple);
+        }
+
+        .feature-card p {
+            color: var(--text-gray);
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        /* Pricing Section */
+        .pricing {
+            padding: 100px 5%;
+            position: relative;
+        }
+
+        .toggle-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 50px;
+        }
+
+        .toggle-text {
+            margin: 0 15px;
+            font-size: 1.1rem;
+            color: var(--text-gray);
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 30px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #333;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background: linear-gradient(45deg, var(--neon-blue), var(--electric-purple));
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(30px);
+        }
+
+        .pricing-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            background: rgba(20, 20, 20, 0.7);
+            border-radius: 15px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 243, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-card.popular {
+            border: 1px solid var(--electric-purple);
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(179, 0, 255, 0.3);
+        }
+
+        .popular-tag {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--electric-purple);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .pricing-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--neon-blue);
+        }
+
+        .price {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--text-light);
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .price span {
+            font-size: 1rem;
+            color: var(--text-gray);
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .pricing-features li {
+            padding: 10px 0;
+            color: var(--text-gray);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+
+        .pricing-btn {
+            background: transparent;
+            color: var(--neon-blue);
+            border: 1px solid var(--neon-blue);
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .pricing-card.popular .pricing-btn {
+            background: linear-gradient(45deg, var(--neon-blue), var(--electric-purple));
+            color: var(--dark-bg);
+            font-weight: 700;
+        }
+
+        .pricing-btn:hover {
+            background: rgba(0, 243, 255, 0.1);
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.5);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--darker-bg);
+            padding: 80px 5% 30px;
+            border-top: 1px solid rgba(0, 243, 255, 0.2);
+            position: relative;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+
+        .footer-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: var(--neon-blue);
+            text-decoration: none;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .footer-logo span {
+            color: var(--electric-purple);
+        }
+
+        .footer-about p {
+            color: var(--text-gray);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-light);
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--neon-blue);
+            color: var(--dark-bg);
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.5);
+            transform: translateY(-3px);
+        }
+
+        .footer-links h3 {
+            font-size: 1.3rem;
+            color: var(--neon-blue);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: var(--text-gray);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--neon-blue);
+            padding-left: 5px;
+        }
+
+        .newsletter h3 {
+            font-size: 1.3rem;
+            color: var(--neon-blue);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .newsletter p {
+            color: var(--text-gray);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .newsletter-form {
+            display: flex;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 1px solid rgba(0, 243, 255, 0.3);
+            background: transparent;
+            color: var(--text-light);
+            border-radius: 30px 0 0 30px;
+            font-family: 'Rajdhani', sans-serif;
+            outline: none;
+        }
+
+        .newsletter-btn {
+            background: linear-gradient(45deg, var(--neon-blue), var(--electric-purple));
+            color: var(--dark-bg);
+            border: none;
+            padding: 0 25px;
+            border-radius: 0 30px 30px 0;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-btn:hover {
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.5);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding-top: 180px;
+            }
+
+            .hero-content {
+                max-width: 100%;
+                margin-bottom: 50px;
+            }
+
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+
+            .ai-bot {
+                width: 300px;
+                height: 300px;
+            }
+
+            .pricing-card.popular {
+                transform: scale(1);
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .typewriter {
+                font-size: 1.4rem;
+                height: 40px;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero p.subtitle {
+                font-size: 1.2rem;
+            }
+
+            .features-grid, .pricing-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .newsletter-input {
+                border-radius: 30px;
+                margin-bottom: 10px;
+            }
+
+            .newsletter-btn {
+                border-radius: 30px;
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Background Balls -->
+    <div class="bg-balls">
+        <div class="ball" style="width: 300px; height: 300px; background: var(--electric-purple); top: 10%; left: 5%; animation-delay: 0s;"></div>
+        <div class="ball" style="width: 200px; height: 200px; background: var(--neon-blue); top: 60%; left: 80%; animation-delay: 2s;"></div>
+        <div class="ball" style="width: 250px; height: 250px; background: var(--neon-pink); top: 30%; left: 70%; animation-delay: 4s;"></div>
+        <div class="ball" style="width: 150px; height: 150px; background: var(--neon-blue); top: 80%; left: 20%; animation-delay: 6s;"></div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <a href="#" class="logo">Nexus<span>AI</span></a>
+        <nav>
+            <ul>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <button class="login-btn">Login</button>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Supercharge your workflow with AI</h1>
+            <p class="subtitle">The future of productivity is here</p>
+            <div class="typewriter" id="typewriter"></div>
+            <button class="cta-btn">Start Free Trial</button>
+        </div>
+        <div class="hero-image">
+            <div class="ai-bot"></div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="section-title">
+            <h2>Powerful Features</h2>
+            <p>Designed to revolutionize how you work, create, and collaborate</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h3>Smart Automation</h3>
+                <p>Let AI handle repetitive tasks so you can focus on what matters most.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-code"></i>
+                </div>
+                <h3>AI Coding Assistant</h3>
+                <p>Write better code faster with intelligent suggestions and auto-completion.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h3>Contextual Understanding</h3>
+                <p>Our AI learns your workflow to provide personalized recommendations.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>Advanced Analytics</h3>
+                <p>Gain insights into your productivity patterns and optimize your workflow.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <h3>Task Automation</h3>
+                <p>Automate complex workflows with our intuitive drag-and-drop interface.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Enterprise Security</h3>
+                <p>Military-grade encryption keeps your data safe and private.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing" id="pricing">
+        <div class="section-title">
+            <h2>Simple, Transparent Pricing</h2>
+            <p>Choose the plan that fits your needs</p>
+        </div>
+        <div class="toggle-container">
+            <span class="toggle-text">Monthly</span>
+            <label class="toggle-switch">
+                <input type="checkbox" id="pricing-toggle">
+                <span class="slider"></span>
+            </label>
+            <span class="toggle-text">Yearly (Save 20%)</span>
+        </div>
+        <div class="pricing-cards">
+            <div class="pricing-card">
+                <h3>Basic</h3>
+                <div class="price monthly">$19<span>/month</span></div>
+                <div class="price yearly" style="display: none;">$15<span>/month</span></div>
+                <ul class="pricing-features">
+                    <li>Core AI Features</li>
+                    <li>5 Automation Workflows</li>
+                    <li>Basic Analytics</li>
+                    <li>Email Support</li>
+                    <li>Up to 3 Team Members</li>
+                </ul>
+                <button class="pricing-btn">Get Started</button>
+            </div>
+            <div class="pricing-card popular">
+                <div class="popular-tag">Most Popular</div>
+                <h3>Pro</h3>
+                <div class="price monthly">$49<span>/month</span></div>
+                <div class="price yearly" style="display: none;">$39<span>/month</span></div>
+                <ul class="pricing-features">
+                    <li>All Basic Features</li>
+                    <li>Unlimited Workflows</li>
+                    <li>Advanced Analytics</li>
+                    <li>Priority Support</li>
+                    <li>Up to 10 Team Members</li>
+                    <li>API Access</li>
+                </ul>
+                <button class="pricing-btn">Get Started</button>
+            </div>
+            <div class="pricing-card">
+                <h3>Enterprise</h3>
+                <div class="price monthly">$99<span>/month</span></div>
+                <div class="price yearly" style="display: none;">$79<span>/month</span></div>
+                <ul class="pricing-features">
+                    <li>All Pro Features</li>
+                    <li>Unlimited Team Members</li>
+                    <li>Dedicated Account Manager</li>
+                    <li>Custom AI Models</li>
+                    <li>On-premise Deployment</li>
+                    <li>24/7 Support</li>
+                </ul>
+                <button class="pricing-btn">Get Started</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-about">
+                <a href="#" class="footer-logo">Nexus<span>AI</span></a>
+                <p>Redefining productivity with cutting-edge AI technology. Our mission is to help you work smarter, not harder.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-discord"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#">Documentation</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Careers</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Community</a></li>
+                    <li><a href="#">Tutorials</a></li>
+                    <li><a href="#">API Status</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="newsletter">
+                <h3>Stay Updated</h3>
+                <p>Subscribe to our newsletter for the latest features and updates.</p>
+                <form class="newsletter-form">
+                    <input type="email" class="newsletter-input" placeholder="Your email address" required>
+                    <button type="submit" class="newsletter-btn">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 NexusAI. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // Typewriter Effect
+        const typewriterElement = document.getElementById('typewriter');
+        const words = ["Writing...", "Coding...", "Planning...", "Organizing...", "Analyzing..."];
+        let wordIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        let isEnd = false;
+
+        function typeWriter() {
+            const currentWord = words[wordIndex];
+            const currentChar = currentWord.substring(0, charIndex);
+            
+            typewriterElement.innerHTML = currentChar + `<span class="blinking-cursor">|</span>`;
+            
+            if (!isDeleting && charIndex < currentWord.length) {
+                charIndex++;
+                setTimeout(typeWriter, 100);
+            } else if (isDeleting && charIndex > 0) {
+                charIndex--;
+                setTimeout(typeWriter, 50);
+            } else {
+                isDeleting = !isDeleting;
+                if (!isDeleting) {
+                    wordIndex = (wordIndex + 1) % words.length;
+                }
+                setTimeout(typeWriter, 500);
+            }
+        }
+
+        // Pricing Toggle
+        const pricingToggle = document.getElementById('pricing-toggle');
+        const monthlyPrices = document.querySelectorAll('.price.monthly');
+        const yearlyPrices = document.querySelectorAll('.price.yearly');
+
+        pricingToggle.addEventListener('change', function() {
+            if (this.checked) {
+                monthlyPrices.forEach(price => price.style.display = 'none');
+                yearlyPrices.forEach(price => price.style.display = 'block');
+            } else {
+                monthlyPrices.forEach(price => price.style.display = 'block');
+                yearlyPrices.forEach(price => price.style.display = 'none');
+            }
+        });
+
+        // Smooth Scrolling for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Initialize Typewriter Effect
+        window.onload = function() {
+            setTimeout(typeWriter, 1000);
+            
+            // Create additional floating balls dynamically
+            const bgBalls = document.querySelector('.bg-balls');
+            for (let i = 0; i < 5; i++) {
+                const ball = document.createElement('div');
+                ball.className = 'ball';
+                const size = Math.random() * 100 + 50;
+                const top = Math.random() * 100;
+                const left = Math.random() * 100;
+                const delay = Math.random() * 8;
+                const duration = Math.random() * 10 + 10;
+                const colors = ['var(--neon-blue)', 'var(--electric-purple)', 'var(--neon-pink)'];
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                
+                ball.style.width = `${size}px`;
+                ball.style.height = `${size}px`;
+                ball.style.top = `${top}%`;
+                ball.style.left = `${left}%`;
+                ball.style.background = color;
+                ball.style.animationDelay = `${delay}s`;
+                ball.style.animationDuration = `${duration}s`;
+                
+                bgBalls.appendChild(ball);
+            }
+        };
+    </script>
+</body>
+</html>
